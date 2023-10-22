@@ -2,8 +2,8 @@
 
   <div class="logo-container">
     <button class="logo" (click)="toogleCollapse()">A</button>
-      <div class="logo-text" *ngIf="collapsed"></div>
-      <button class="btn-close" (click)="closeSidenav()" *ngIf="collapsed">
+      <div class="logo-text" @fadeInOut *ngIf="collapsed"></div>
+      <button class="btn-close" @rotate (click)="closeSidenav()" *ngIf="collapsed">
         <i class="fa-solid fa-xmark"></i>
       </button>
   </div>
@@ -11,7 +11,7 @@
     <li class="sidenav-nav-item" *ngFor="let data of navData">
       <a class="sidenav-nav-link"[routerLink]="[data.routeLink]">
         <i class="sidenav-link-icon" [class]="data.icon"></i>
-        <span class="sidenav-link-text" *ngIf="collapsed">{{data.Label}}</span>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{data.Label}}</span>
       </a>
     </li>
   </ul>
