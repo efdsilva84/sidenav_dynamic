@@ -1,0 +1,164 @@
+/*nova as identidica*/
+.as{
+  border: 3.8px solid #000;
+  width: 900px;
+}
+.header-as{
+  width: 100%;
+  border-bottom: 3.8px solid #000;
+  display: flex;
+}
+.header-as-logo{
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-right: 3.8px solid #000;
+}
+.header-as-logo img{
+  margin-left: 15px;
+  margin-top: 5px;
+}
+.header-as-logo h1{
+  margin-right: 4rem;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.header-as-n{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+.body-as{
+  width: 100%;
+}
+.body-as-col{
+  display: flex;
+}
+.dados-info{
+  width: 100%;
+  border-bottom: 3.5px solid #000;
+  margin-right: 10px;
+  font-size: 18px;
+
+}
+.inf{
+  margin-left: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+  font-size: 20px;
+}
+.body1{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  border-right: 3.8px solid #000;
+}
+.body11{
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+}
+.body2{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+.assina{
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.carim{
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 3.8px solid #000;
+}
+.carim img{
+  margin-top: 10px;
+}
+.carimbo2{
+  margin-top: 10px;
+  font-weight: bold;
+}
+.carimbo1{
+  font-weight: bold;
+
+}
+.area-footer{
+  background-color: #000;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+
+}
+.area-footer label{
+  margin: 10px;
+  color: #fff;
+
+
+}
+.area-footer-2{
+  text-align: center;
+}
+.area-footer-2 label{
+  margin: 10px;
+}
+.assina-int{
+  width: 90%;
+  margin: 5px;
+  text-align: center;
+
+
+
+}
+.assina-int1{
+  width: 90%;
+  margin: 5px;
+  border-top: 2px solid #000;
+  text-align: center;
+
+}
+.assina-int2{
+  width: 90%;
+  margin: 5px;
+  text-align: center;
+
+
+}
+.assina-int3{
+  width: 90%;
+  margin: 5px;
+  border-top: 2px solid #000;
+  text-align: center;
+
+
+}
+.sub-menu3{
+  background: #262627;
+}
+.ocultar{
+  display: none;
+}
+.mostrarMn{
+  display: block;
+}
+.bt{
+  cursor: pointer;
+}
+
+
+/*destalhes registros*/
+.header-doc{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

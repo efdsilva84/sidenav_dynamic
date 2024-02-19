@@ -5,7 +5,7 @@
   /* z-index: 1;
   position: relative; */
   transition: all .5s ease;
-  background: #f4f7fa;
+  /* background: #f4f7fa; */
   padding: 3rem;
 }
 .body-trimed{
@@ -16,3 +16,4 @@
   width: calc(100% - 5rem);
   margin-left: 5rem;
 }
+

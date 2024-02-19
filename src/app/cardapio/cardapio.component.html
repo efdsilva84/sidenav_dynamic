@@ -1,0 +1,162 @@
+  <div class="card-head">
+Cardapio
+  </div>
+  <div class="card-body">
+
+    <div class="areaCar">
+      <div  class="carros" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+        <div class="infos"  >
+          <h5>LISTA DO DIA</h5>
+          <!-- <p>lista preferência diária</p> -->
+        </div>
+        <i class="fa-solid fa-utensils fa-2x"></i>
+        </div>
+
+        <div  class="carros" data-bs-toggle="modal" data-bs-target="#novaProteina">
+
+          <div class="infos"  >
+            <h5>NOVA PROTEÍNA APP</h5>
+            <!-- <p>item inseridos aqui apareceram no app</p> -->
+          </div>
+          <i class="fa-solid fa-bowl-food fa-2x"></i>
+                  </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Lista de Refeições</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="content" #content class="modal-body" *ngFor="let item of refeicao">
+        <div class="lista">
+          <div class="data">
+            <h5>{{item.data_entrada}}</h5>
+        </div>
+          <div class="nome">
+<h5>{{item.nome}}</h5>
+          </div>
+          <div class="refeicao">
+<h5>{{item.proteina}}</h5>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button (click)="gerarPDF()" type="button" class="btn btn-primary">Imprimir PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal Nova proteina-->
+<div class="modal fade" id="novaProteina" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar Proteína App</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+
+      <form [formGroup]="dadosForm" (ngSubmit)="sendForm(dadosForm)">
+
+
+      <div class="modal-body">
+
+
+
+        <div class="row">
+          <div class="col">
+            <input formControlName="proteina" type="text" class="form-control" placeholder="Digite a proteína" aria-label="First name">
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
+        <button type="submit" class="btn btn-primary">SALVAR</button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+
+
+      </div>
+
+      <div class="card-body">
+        <div *ngIf="isLoading; else elseTableBlock">
+          <app-loader/>
+      </div>
+
+      <ng-template #elseTableBlock >
+
+  <div class="areatable">
+
+
+
+    <div class="cardcomida">
+      <div class="topocard">
+        <h2>MENU APP</h2>
+
+        <i class="fa-solid fa-utensils fa-3x"></i>
+        <h4>{{dataCardapio}}</h4>
+
+
+
+      </div>
+      <div class="list" *ngFor="let item of refeicaoDia">
+
+        <div class="listaProteinas">
+
+          <h6><i class="fa-solid fa-check"></i>&nbsp;{{item.proteina}}</h6>
+
+        </div>
+        <div class="acoes">
+          <i style="cursor: pointer;" (click)="deleteProteina(item)" class="fa-solid fa-trash"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Proteína Disponíveis</th>
+          <th>Ações</th>
+
+
+        </tr>
+      </thead>
+      <tbody  *ngFor="let item of proteinas" >
+        <tr>
+
+          <td >{{item.proteina}}</td>
+          <td ><i style="cursor: pointer;" (click)="addProteinaApp(item)" class="fa-solid fa-plus"></i></td>
+
+        </tr>
+
+      </tbody>
+    </table>
+
+
+
+  </div>
+</ng-template>
+
+  </div>
+</div>

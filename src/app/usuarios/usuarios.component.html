@@ -1,146 +1,202 @@
-<h1>Usuarios</h1>
-<div class="card">
-  <div class="card-head">
-Usuários do Sistema
-  </div>
-  <div class="card-body">
-    <table class="table align-middle mb-0 bg-white">
-      <thead class="bg-light">
-        <tr>
-          <th>Name</th>
-          <th>Title</th>
-          <th>Status</th>
-          <th>Position</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <div class="d-flex align-items-center">
-              <img
-                  src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  class="rounded-circle"
-                  />
-              <div class="ms-3">
-                <p class="fw-bold mb-1">John Doe</p>
-                <p class="text-muted mb-0">john.doe@gmail.com</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <p class="fw-normal mb-1">Software engineer</p>
-            <p class="text-muted mb-0">IT department</p>
-          </td>
-          <td>
-            <span class="badge badge-success rounded-pill d-inline">Active</span>
-          </td>
-          <td>Senior</td>
-          <td>
-            <button type="button" class="btn btn-link btn-sm btn-rounded">
-              Edit
+<div>
+  <div class="container-fluid mt-5">
+    <div class="card">
+      <div class="card-header">
+          <h4>Lista Colaboradores
+            <button (click)="uPendentes()" type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#solicitationUser">
+              <i style="margin-top: 6px;" class="fa-solid fa-bell"></i>&nbsp;&nbsp;<span  class="badge bg-secondary">1</span>
+              <!--  -->
             </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="d-flex align-items-center">
-              <img
-                  src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                  class="rounded-circle"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  />
-              <div class="ms-3">
-                <p class="fw-bold mb-1">Alex Ray</p>
-                <p class="text-muted mb-0">alex.ray@gmail.com</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <p class="fw-normal mb-1">Consultant</p>
-            <p class="text-muted mb-0">Finance</p>
-          </td>
-          <td>
-            <span class="badge badge-primary rounded-pill d-inline"
-                  >Onboarding</span
-              >
-          </td>
-          <td>Junior</td>
-          <td>
-            <button
-                    type="button"
-                    class="btn btn-link btn-rounded btn-sm fw-bold"
-                    data-mdb-ripple-color="dark"
-                    >
-              Edit
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="d-flex align-items-center">
-              <img
-                  src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                  class="rounded-circle"
-                  alt=""
-                  style="width: 45px; height: 45px"
-                  />
-              <div class="ms-3">
-                <p class="fw-bold mb-1">Kate Hunington</p>
-                <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <p class="fw-normal mb-1">Designer</p>
-            <p class="text-muted mb-0">UI/UX</p>
-          </td>
-          <td>
-            <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-          </td>
-          <td>Senior</td>
-          <td>
-            <button
-                    type="button"
-                    class="btn btn-link btn-rounded btn-sm fw-bold"
-                    data-mdb-ripple-color="dark"
-                    >
-                    <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-  </div>
-</div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </h4>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+
+
+      <div class="card-body">
+        <div *ngIf="isLoading; else elseTableBlock">
+            <app-loader/>
+        </div>
+        <ng-template #elseTableBlock>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>avatar</th>
+
+                <th>Data Cadastro</th>
+
+                <th>Nome</th>
+                <th>Cpf</th>
+                <th>Cargo</th>
+                <th>Ações</th>
+
+
+
+              </tr>
+            </thead>
+            <tbody *ngFor="let user of listaUserApp">
+              <tr>
+                <th><img width="80px" height="80px" style="border-radius: 40px;" src="{{url_img}}{{user.image_func}}"/></th>
+                <th>{{user.data_cad}}</th>
+                <th>{{user.nome}}</th>
+                <td>{{user.cpf}}</td>
+                <td>{{user.funcao}}</td>
+                <td *ngIf="user.status_func == '0'"><i (click)="bloqueaerPonto(user.id_funcionario)" style="color: green; cursor: pointer;" class="fa-solid fa-lock"></i></td>
+                <td *ngIf="user.status_func == '1'"><i (click)="desbloqueaerPonto(user.id_funcionario)" style="color: red; cursor: pointer;" class="fa-solid fa-lock"></i></td>
+
+
+
+
+              </tr>
+
+            </tbody>
+          </table>
+        </ng-template>
+
       </div>
     </div>
   </div>
 </div>
 
+
+<h1>
+
+</h1>
+
+
+
+
+<!-- Modal ver User -->
+<div class="modal fade" id="viewUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Detalhes Usuários</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Empresa</th>
+              <th>Login</th>
+              <th>Hines</th>
+              <th>Status</th>
+              <th>Açoes</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let user of getuser">
+            <tr>
+              <th>{{user.nome}}</th>
+              <td>{{user.nome_empresa}}</td>
+              <td>{{user.login}}</td>
+              <td>{{user.id_hines}}</td>
+              <td *ngIf="user.bloqueado == 0" ><label>ativo</label></td>
+              <td *ngIf="user.bloqueado == 1" data-bs-toggle="modal">
+                <label style="background-color: #f7e3e7; padding: 0px 5px; border-radius: 3px; color: #9d2739; font-weight: bold; cursor: pointer;">bloqueado</label></td>
+              <td>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-warning" (click)="edit()">Editar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal ver Bloquear User -->
+
+
+<div class="modal fade" id="blocksUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" *ngFor="let user of user">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Mensagem</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        Deseja realmente bloquear o usuario <b>{{user.nome}}</b> ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="bloqueio(user.id)">Bloquear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal ver DesBloquear User -->
+
+
+<div class="modal fade" id="unlockUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" *ngFor="let user of user">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Mensagem</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        Deseja realmente desbloquear o usuario <b>{{user.nome}}</b> ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="desbloqueioUsuario(user.id)">Desbloquear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal ver Soliciações App User -->
+
+<div class="modal fade" id="solicitationUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Solicitações</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="carde" *ngFor="let item of userPendente">
+          <div class="area-carde">
+
+
+            <div class="dados">
+              <label><b>{{item.nome}}</b></label>
+              <label>{{item.cpf}}</label>
+
+            </div>
+
+            <div class="btns">
+
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-success"(click)="aprovaUser(item.id)">Aprovar</button>
+                <button type="button" class="btn  btn-outline-danger"(click)="reprovaUser(item.id)">Reprovar</button>
+              </div>
+
+          </div>
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Aprovar Todos</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

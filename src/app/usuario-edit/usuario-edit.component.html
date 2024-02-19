@@ -1,0 +1,67 @@
+<div>
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-header">
+          <h4>Novo Usuário
+            <a routerLink="" href="" class="btn btn-danger float-end">Voltar</a>
+          </h4>
+      </div>
+      <div class="card-body">
+        <div *ngIf="isLoading; else elseform">
+            <app-loader :title="loadingTitle"/>
+        </div>
+        <ng-template #elseform>
+
+        <form [formGroup]="formulario" class="row g-3" (ngSubmit)="updateUser()">
+          <div class="col-md-4">
+            <label for="inputState" class="form-label">Hines:</label>
+            <select id="inputState" class="form-select" formControlName="local_trabalho" (change)="buscaEmpresas($event)">
+              <option  *ngFor="let item of listaLocal" value="{{item.id_local}}">{{item.local_trabalho}}</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label for="inputState" class="form-label">Empresa:</label>
+            <select id="inputState" class="form-select" formControlName="fk_inquilino">
+              <option  class="m-1" *ngFor="let item of listaEmpresas" value="{{item.id_empresa}}">{{item.nome_empresa}}</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label for="inputState" class="form-label">Perfil:</label>
+            <select id="inputState" class="form-select" formControlName="perfil">
+              <option value="adm">Adm</option>
+              <option value="inquilino" >Inquilino</option>
+              <option value="portaria" >Portaria</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label for="inputZip" class="form-label">Nome:</label>
+            <input type="text" class="form-control" id="inputZip" formControlName="nome">
+          </div>
+
+          <div class="col-md-2">
+            <label for="inputZip" class="form-label">CPF</label>
+            <input type="text" class="form-control" id="inputZip" formControlName="cpf">
+          </div>
+
+          <div class="col-md-2">
+            <label for="inputZip" class="form-label">Matrícula</label>
+            <input type="text" class="form-control" id="inputZip" formControlName="matricula">
+          </div>
+
+          <div class="col-md-4">
+            <label for="inputZip" class="form-label">Login:</label>
+            <input type="text" class="form-control" id="inputZip" formControlName="login" >
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </form>
+      </ng-template>
+
+      </div>
+    </div>
+  </div>
+</div>

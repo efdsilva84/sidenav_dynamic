@@ -1,0 +1,44 @@
+.areaCar{
+  width: 100%;
+  display: flex;
+}
+.carros{
+  background-color: #fff;
+  width: 20%;
+  height: 100px;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+  border-radius: 10px;
+  border-left: 5px solid seagreen;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.infos{
+  display: flex;
+  margin: 1rem;
+  width: auto;
+  justify-content: space-between;
+  align-items: center;
+  h5{
+    color: springgreen;
+
+  }
+}
+.numeros{
+  width: auto;
+  display: flex;
+  margin: .5rem;
+
+
+}
+/* .infos h5{
+  color: springgreen;
+}
+.infos h4{
+  margin-top: 5px;
+} */
+/* .areaCar i{
+  margin: 1.5rem;
+} */

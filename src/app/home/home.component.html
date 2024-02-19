@@ -1,29 +1,185 @@
 <h1>Home</h1>
 <div class="card">
   <div class="card-head">
-Credenciais
+<button (click)="logout()" class="btn">Sair&nbsp;<i class="fa-solid fa-right-from-bracket"></i></button>
   </div>
   <div class="card-body">
-    orem Ipsum is simply dummy text of the printing and typesetting industry.
-     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-      when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-  </div>
-</div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+
+    <div class="areaCar">
+      <div  class="carros" data-bs-toggle="modal" data-bs-target="#cardapioDia">
+        <!--para navegar para outra pagina mudar o nome da função para: carretas() -->
+        <!-- (click)="registroCarretas()"  data-bs-toggle="modal" data-bs-target="#AllCarretas"-->
+        <div class="infos">
+          <h5>CARDÁPIO DO DIA</h5>
+          <i class="fa-solid fa-utensils fa-2x"></i>
+
+        </div>
+        <div class="numeros">
+          <h4>0</h4>
+
+        </div>
+
+        </div>
+
+        <div  class="carros" data-bs-toggle="modal" data-bs-target="#pontosRegistrados">
+          <!--para navegar para outra pagina mudar o nome da função para: carretas() -->
+          <!-- (click)="registroCarretas()"  data-bs-toggle="modal" data-bs-target="#AllCarretas"-->
+          <div class="infos">
+            <h5>PONTOS</h5>
+            <i class="fa-regular fa-clock fa-2x"></i>
+
+          </div>
+          <div class="numeros">
+
+            <h4 *ngIf="qtdPontos">{{qtdPontos}}</h4><h4 *ngIf="!qtdPontos">0</h4>&nbsp;|&nbsp;  <h4 style="font-weight: bold;">{{qtdFuncionarios}}</h4>
+          </div>
+
+
+          </div>
+
+          <div  class="carros" data-bs-toggle="modal" data-bs-target="#viewFuncionarios">
+            <!--para navegar para outra pagina mudar o nome da função para: carretas() -->
+            <!-- (click)="registroCarretas()"  data-bs-toggle="modal" data-bs-target="#AllCarretas"-->
+            <div class="infos">
+              <h5>FUNCIONÁRIOS</h5>
+              <i class="fa-solid fa-users fa-2x"></i>
+
+            </div>
+            <div class="numeros">
+              <h4 *ngIf="!qtdFuncionarios">{{qtdFuncionarios}}</h4>
+
+              <h4>{{qtdFuncionarios}}</h4>
+
+
+            </div>
+
+            </div>
+    </div>
+</div>
+
+
+<!-- Modal view funcionarios -->
+<div class="modal fade" id="viewFuncionarios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h5 class="modal-title" id="exampleModalLabel">Lista Funcionários</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <table class="table table-bordered">
+
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Cargo</th>
+
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of listaFuncionarios" >
+            <tr>
+              <td>{{item.data_cad}}</td>
+              <td>{{item.nome}}</td>
+              <td>{{item.cpf}}</td>
+              <td>{{item.funcao}}</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Salvar PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal pontos registrados -->
+<div class="modal fade" id="pontosRegistrados" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pontos Registrados</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Nome</th>
+              <th>Cargo</th>
+              <th>Entrada</th>
+              <th>Saida</th>
+
+
+
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of pontosBatidosDias" >
+            <tr>
+              <td>{{item.data_entrada}}</td>
+              <td>{{item.nome}}</td>
+              <td>{{item.funcao}}</td>
+              <td>{{item.hora_entrada}}</td>
+              <td>{{item.hora_saida}}</td>
+
+
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Imprimir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal cardapdio dia -->
+<div class="modal fade" id="cardapioDia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Escolhas cardapio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Nome</th>
+              <th>Cargo</th>
+              <th>Proteina</th>
+
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of pontosBatidosDias" >
+            <tr>
+              <td>{{item.data_entrada}}</td>
+              <td>{{item.nome}}</td>
+              <td>{{item.proteina}}</td>
+              <td>{{item.funcao}}</td>
+            </tr>
+
+          </tbody>
+
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -32,3 +188,4 @@ Credenciais
     </div>
   </div>
 </div>
+

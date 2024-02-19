@@ -1,0 +1,96 @@
+<div>
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-header">
+          <h4>Novo Colaborador
+            <a class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#novoCargo">Novo Cargo</a>
+          </h4>
+      </div>
+      <div class="card-body">
+        <div *ngIf="isLoading; else elseform">
+            <app-loader :title="loadingTitle"/>
+        </div>
+        <ng-template #elseform>
+
+        <form class="row g-3" [formGroup]="dadosUser" (ngSubmit)="enviarFormulario()">
+
+          <div class="input-group">
+            <img [src]="url" height="150px" width="150px">
+            <input name="image"  type="file" class="form-control" id="inputGroupFile04" (change)="fileToBase64($event)" aria-label="Upload">
+          </div>
+
+
+          <div class="col-md-4">
+            <label for="funcao" class="form-label">Cargo:</label>
+            <select id="inputState" class="form-select" formControlName="funcao">
+              <option selected class="m-1" *ngFor="let item of dados" value="{{item.id_cargo}}">{{item.funcao}}</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" class="form-control" id="inputZip" formControlName="nome" >
+          </div>
+
+          <div class="col-md-4">
+            <label for="cpf" class="form-label">CPF</label>
+            <input type="number" class="form-control" id="inputZip" formControlName="cpf" >
+          </div>
+
+          <div class="col-md-4">
+            <label for="mt" class="form-label">Matricula:</label>
+            <input type="text" class="form-control" id="inputZip" formControlName="mt" >
+          </div>
+
+
+          <div class="col-md-4">
+            <label for="telefone" class="form-label">Telefone:</label>
+            <input type="text" class="form-control" id="inputZip" formControlName="telefone" >
+          </div>
+
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </form>
+      </ng-template>
+
+
+
+
+<!-- Modal nogo Cargo -->
+<div class="modal fade" id="novoCargo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Novo Cargo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="dadosForm" (ngSubmit)="sendFormCargo()">
+
+      <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <input formControlName="cargo" type="text" class="form-control" placeholder="Digite o cargo" aria-label="First name">
+
+            </div>
+
+          </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+</div>

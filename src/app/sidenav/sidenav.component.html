@@ -1,20 +1,34 @@
 <div class="sidenav"[ngClass]="collapsed ?'sidenav-collapsed':''">
-
   <div class="logo-container">
-    <button class="logo" (click)="toogleCollapse()">A</button>
+    <button class="logo" (click)="toogleCollapse()"><i class="fa-regular fa-clock"></i></button>
       <div class="logo-text" @fadeInOut *ngIf="collapsed"></div>
       <button class="btn-close" @rotate (click)="closeSidenav()" *ngIf="collapsed">
         <i class="fa-solid fa-xmark"></i>
       </button>
   </div>
+  <!-- <header class="head">
+
+      <img style="width: 50px; height: 50px; border-radius: 25px;"  src="" alt="">
+
+
+         <h6 style="margin-top: 10px;">{{id_usuario}}</h6>
+</header> -->
   <ul class="sidenav-nav">
     <li class="sidenav-nav-item" *ngFor="let data of navData">
-      <a class="sidenav-nav-link"[routerLink]="[data.routeLink]">
+      <a class="sidenav-nav-link"[routerLink]="[data.routeLink]"
+      routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+      >
         <i class="sidenav-link-icon" [class]="data.icon"></i>
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{data.Label}}</span>
       </a>
+      <!-- <app-sublevel-menu
+      [data]="data"
+      [collapsed]="collapsed"
+
+      ></app-sublevel-menu> -->
     </li>
   </ul>
+</div>
 
 
 

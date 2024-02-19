@@ -1,11 +1,13 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { navbarData } from './nav-data';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
+import { ApiService } from '../services/api.service';
 
 interface SideNavToggle{
   scrrenWidth: number;
   collapsed: boolean;
 }
+
 
 @Component({
   selector: 'app-sidenav',
@@ -39,8 +41,21 @@ interface SideNavToggle{
   ]
 })
 export class SidenavComponent implements OnInit {
+  id_usuario:any;
+  logo:any;
+  url_img = this.api.url_sistema + "/assets/images/"
+
+
+
+
+  constructor( private api: ApiService,){
+
+  }
 
   ngOnInit(): void {
+   this.id_usuario = localStorage.getItem('user');
+   this.logo = localStorage.getItem('logo')
+   console.log('nome user', this.id_usuario, this.logo);
     this.scrrenWidth = window.innerWidth;
   }
 
@@ -73,5 +88,6 @@ export class SidenavComponent implements OnInit {
     this.onToggleSideNav.emit({collapsed:this.collapsed, scrrenWidth: this.scrrenWidth});
 
   }
+
 
 }

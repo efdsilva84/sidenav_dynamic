@@ -1,33 +1,296 @@
 <h1>Registros</h1>
-<div class="card">
-  <div class="card-head">
-Credenciais
-  </div>
-  <div class="card-body">
-    orem Ipsum is simply dummy text of the printing and typesetting industry.
-     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-      when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-  </div>
-</div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+
+
+<div class="card">
+
+  <div class="row m-3">
+    <div class="col-md-2">
+      <input (change)="searchData($event)" type="date" class="form-control" placeholder="First name" aria-label="First name">
+    </div>
+  </div>
+
+  <div class="card-head">
+Registros
+<button (click)="gerarPDF()" float="end" class="btn btn-primary">PDF</button>
+  </div>
+
+  <div *ngIf="isLoading; else elseTableBlock">
+    <app-loader/>
+</div>
+
+
+
+  <div class="card-body">
+
+
+    <ng-template #elseTableBlock>
+
+    <table id="content" #content class="table table-bordered">
+
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Entrada</th>
+          <th>Nome</th>
+          <th>Cargo</th>
+          <th>Saida</th>
+          <th>Hora</th>
+
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of dados" >
+        <tr>
+          <th>{{item.data_entrada}}</th>
+          <td>{{item.hora_entrada}}</td>
+          <td>{{item.nome_user}}</td>
+          <td>{{item.funcao}}</td>
+
+          <td>{{item.data_hora}}</td>
+          <td>{{item.hora_saida}}</td>
+
+
+
+
+        </tr>
+
+      </tbody>
+
+    </table>
+  </ng-template>
+
+  </div>
+
+</div>
+
+
+
+<!-- Modal ver autorização -->
+<div class="modal fade" id="ViewAut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Autorização de Saída</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="as" *ngFor="let item of allRegistros">
+          <div class="header-as">
+            <div class="header-as-logo">
+              <img width="240px" height="100px" src="../../assets/img/hines3.jpg"/>
+              <h1>AS</h1>
+            </div>
+
+            <div class="header-as-n">
+              <h2>{{item.id_rg}}</h2>
+
+            </div>
+          </div>
+
+          <div class="body-as">
+            <div class="body-as-col">
+              <div class="body1">
+                <div class="body11">
+                  <div class="inf"><label>Transportadora:</label></div>
+                  <div class="dados-info"><label>&nbsp;{{item.empresa_mot}}</label></div>
+                </div>
+                <div class="body11">
+                  <div class="inf"><label>Nome/Carreteiro:</label></div>
+                  <div class="dados-info"><label>&nbsp;{{item.mot}}</label></div>
+                </div>
+
+                <div class="body11">
+                  <div class="inf"><label>CNH:</label></div>
+                  <div class="dados-info"><label>&nbsp;{{item.cnh_mot}}</label></div>
+                </div>
+
+                <div class="body11">
+                  <div class="inf"><label>Placa Baú:</label></div>
+                  <div class="dados-info"><label *ngIf="item.tipo_registro === '2'">&nbsp;{{item.placa_cv}}</label></div>
+                </div>
+
+                <div class="body11">
+                  <div class="inf"><label>Placa Cavalo:</label></div>
+                  <div class="dados-info"><label>&nbsp;{{item.placa_cv}}</label></div>
+                </div>
+
+                <div class="body11">
+                  <div class="inf"><label>Placa Carreta:</label></div>
+                  <div class="dados-info"><label>&nbsp;{{item.placa_exit}}</label></div>
+                </div>
+
+                <div class="body11">
+                  <div class="inf"><label>Número Container:</label></div>
+                  <div class="dados-info"><label>&nbsp;{{item.dados_cont_saida}}</label></div>
+                </div>
+
+                <div class="body11">
+                  <div class="inf"><label>Hora/Saida:</label></div>
+                  <div class="dados-info"><label>&nbsp;{{item.hr_env_portaria}}</label></div>
+                </div>
+
+                <div class="body11">
+                  <div class="inf"><label>Data:</label></div>
+                  <div class="dados-info"><label>&nbsp;{{item.dt_open}}</label></div>
+                </div>
+
+                <div class="body11">
+                  <div class="inf"><label>Lacres:</label></div>
+                  <div class="dados-info"><label>&nbsp;{{item.lcr_saida}}</label></div>
+                </div>
+
+              </div>
+
+              <div class="body2">
+                <div class="assina">
+                <div class="assina-int">
+                  <label>{{item.nome_aut_inquilino}}</label>
+                  <!-- <img *ngIf="item.nome_aut_inquilino" width="250px" height="50px" src="{{url_img}}{{item.ass}}"/> -->
+
+                </div>
+
+                <div class="assina-int1">
+                  <b>Autorizante</b>
+                </div>
+
+                <div class="assina-int2">
+                  <label>{{item.nome_aut_inquilino}}</label>
+                  <!-- <img *ngIf="item.nome_aut_inquilino" width="250px" height="50px" src="{{url_img}}{{item.ass}}"/> -->
+
+                </div>
+
+                <div class="assina-int3">
+                  <b>Assinatura Aturoziante</b>
+                </div>
+
+
+
+                </div>
+
+                <div class="carim">
+                  <div class="carimbo2">Carimbo Empresa</div>
+                  <img *ngIf="item.nome_aut_inquilino" width="250px" src="{{url_img}}{{item.img_logo}}"/>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+          <div class="area-footer">
+            <label>AUTORIZAÇÃO DE SÁIDA</label>
+          </div>
+          <div class="area-footer-2">
+            <label>É INDISPENSÁVEL A APRESENTAÇÃO DESTE PARA SÁIDA DO VEÍCULO</label>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="detailRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Detalhes do Registro</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngFor="let item of allRegistros">
+        <div class="doc">
+          <div class="header-doc">
+            <img width="300" height="120" src="../../assets/img/hines3.jpg">
+            <img height="150" src="{{url_img}}{{item.img_logo}}"/>
+          </div>
+          <h1>Entrada</h1>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Motorista</th>
+                <th>CNH:</th>
+                <th>Transportadora</th>
+                <th>Placa Cavalo</th>
+                <th>Placa Carreta</th>
+                <th>Lacres</th>
+                <th>Destino</th>
+
+
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of allRegistros">
+              <tr>
+                <th>{{item.dt_open}}</th>
+                <td>{{item.hr_open}}</td>
+                <td>{{item.mot}}</td>
+                <td>{{item.cnh_mot}}</td>
+                <td>{{item.empresa_mot}}</td>
+                <td>{{item.placa_cv}}</td>
+                <td>{{item.placa_carreta}}</td>
+                <td >{{item.lacres}}</td>
+                <td >{{item.nome_empresa}}</td>
+
+
+
+              </tr>
+
+            </tbody>
+          </table>
+          <hr style="margin-top: 70px; margin-bottom: 70px;">
+          <h1>Saída</h1>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Motorista</th>
+                <th>CNH:</th>
+                <th>Transportadora</th>
+                <th>Placa Cavalo</th>
+                <th>Placa Carreta</th>
+                <th>Lacres</th>
+                <th>Hora Autorização</th>
+                <th>Autorizado:</th>
+
+
+
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of allRegistros">
+              <tr>
+                <th>{{item.dt_exit}}</th>
+                <td>{{item.hr_exit}}</td>
+                <td><label *ngIf="item.hr_env_portaria">{{item.mot}}</label></td>
+                <td><label *ngIf="item.hr_env_portaria">{{item.cnh_mot}}</label></td>
+                <td><label *ngIf="item.hr_env_portaria">{{item.empresa_mot}}</label></td>
+                <td><label *ngIf="item.hr_env_portaria">{{item.placa_cv}}</label></td>
+                <td>{{item.placa_exit}}</td>
+                <td >{{item.lcr_saida}}</td>
+                <td >{{item.hr_env_portaria}}</td>
+                <td >{{item.nome_aut_inquilino}}</td>
+
+
+
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Imprimir</button>
       </div>
     </div>
   </div>

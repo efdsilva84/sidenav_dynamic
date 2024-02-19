@@ -1,5 +1,5 @@
 .sidenav{
-  background: #263236;
+  background: #263238;
   transition: all .5s ease;
   position:fixed;
   /*atributo position ativo faz modal boot não sobreescrever*/
@@ -18,7 +18,7 @@
     .logo{
       background: #fff;
       text-align: center;
-      width: 3rem;
+      width: rem;
       min-width: 3rem;
       border-radius: 0.313rem;
       padding: 0.313rem;
@@ -29,7 +29,7 @@
     }
     .logo-text{
       margin-left: 1.5rem;
-      font-size: 24px;
+      font-size: 16px;
       font-weight: 700;
       color: #fff;
 
@@ -100,4 +100,32 @@
 
 }
 
+}
+
+
+.head{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  text-align: center;
+  border-bottom: 1px solid #6f270f;
+  border-top: 1px solid #6f270f;
+  img{
+    margin-top: 10px;
+  }
+
+  h6{
+    color: #fff;
+  }
+}
+
+.active{
+  background-color: #fff;
+
+  .sidenav-link-icon,
+  .sidenav-link-text{
+    color: #000;
+  }
 }
